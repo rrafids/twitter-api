@@ -13,6 +13,9 @@ const UserService = require('./src/service/user');
 // Import handler
 const AuthHandler = require('./src/handler/auth');
 const UserHandler = require('./src/handler/user');
+const ThreadRepository = require('./src/repository/thread');
+const ThreadService = require('./src/service/thread');
+const ThreadHandler = require('./src/handler/thread');
 
 app.use(express.json());
 
@@ -29,6 +32,14 @@ const userHandler = new UserHandler(userService);
 
 // User
 app.get('/users', userHandler.getAll);
+
+const threadRepository = new ThreadRepository();
+const threadService = new ThreadService(threadRepository)
+const threadHandler = new ThreadHandler(threadService);
+
+// Threads
+app.get('/threads', threadHandler.getAll);
+
 
 app.use((req, res, next) => {
   res.status(404).send({

@@ -16,7 +16,6 @@ class AuthService {
         createdUser: createdUser
       }
     } catch (err) {
-      console.log("err", err);
       return {
         statusCode: 500,
         createdUser: null

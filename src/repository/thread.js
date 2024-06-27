@@ -6,16 +6,19 @@ class ThreadRepository {
   async findAll() {
     const threadList = await Thread.findAll(
       {
+        // attributes: ['id', 'title', 'content'],
         include: [
           {
             model: User,
             required: true,
-            as: "user"
+            as: "user",
+            // attributes: ['name']
           },
           {
             model: Category,
             required: true,
-            as: "category"
+            as: "category",
+            // attributes: ['name']
           }
         ]
       }

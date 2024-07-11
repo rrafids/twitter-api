@@ -40,6 +40,11 @@ const threadHandler = new ThreadHandler(threadService);
 // Threads
 app.get('/threads', threadHandler.getAll);
 
+// Swagger
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger/swagger.json');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res, next) => {
   res.status(404).send({

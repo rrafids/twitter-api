@@ -1,6 +1,6 @@
-const AuthHandler = require('./src/handler/auth');
-const AuthService = require('./src/service/auth');
-const UserRepository = require('./src/repository/user');
+const AuthHandler = require('../handler/auth');
+const AuthService = require('../service/auth');
+const UserRepository = require('../repository/user');
 
 const userRepository = new UserRepository();
 const authService = new AuthService(userRepository);

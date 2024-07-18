@@ -1,6 +1,7 @@
 class AuthService {
-  constructor(userRepository) {
+  constructor(userRepository, briApiRepositiry) {
     this.userRepository = userRepository;
+    briApiRepositiry
   }
 
   async login({ email, password }) {

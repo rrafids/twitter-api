@@ -5,27 +5,32 @@ const PORT = 2000;
 // Import dependecy
 // Import repository
 const UserRepository = require('./src/repository/user');
+const ThreadRepository = require('./src/repository/thread');
 
 // Import service
-const AuthService = require('./src/service/auth');
 const UserService = require('./src/service/user');
+const ThreadService = require('./src/service/thread');
 
 // Import handler
-const AuthHandler = require('./src/handler/auth');
-const UserHandler = require('./src/handler/user');
-const ThreadRepository = require('./src/repository/thread');
-const ThreadService = require('./src/service/thread');
 const ThreadHandler = require('./src/handler/thread');
+const UserHandler = require('./src/handler/user');
 
 app.use(express.json());
 
 const userRepository = new UserRepository();
-const authService = new AuthService(userRepository);
-const authHandler = new AuthHandler(authService);
+
+const router = express.Router();
+
+// Import router
+const authRouter = require('./src/router/auth');
+
+// Use router
+router.use('/auth', authRouter)
+
+app.use('/api', router)
 
 // Auth 
-app.post('/auth/login', authHandler.login);
-app.post('/auth/register', authHandler.register);
+router.use('/files', fileRoutes)
 
 const userService = new UserService(userRepository)
 const userHandler = new UserHandler(userService);

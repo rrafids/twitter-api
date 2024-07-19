@@ -30,13 +30,16 @@ router.use('/auth', authRouter)
 app.use('/api', router)
 
 // Auth 
-router.use('/files', fileRoutes)
+// router.use('/files', fileRoutes)
 
 const userService = new UserService(userRepository)
 const userHandler = new UserHandler(userService);
 
+// import middleware
+const authMiddleware = require('./src/middleware/auth')
+
 // User
-app.get('/users', userHandler.getAll);
+app.get('/users', authMiddleware.authenticate, authMiddleware.checkUserIsJavid, userHandler.getAll);
 
 const threadRepository = new ThreadRepository();
 const threadService = new ThreadService(threadRepository)

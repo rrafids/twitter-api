@@ -1,3 +1,5 @@
+const express = require('express');
+
 const AuthHandler = require('../handler/auth');
 const AuthService = require('../service/auth');
 const UserRepository = require('../repository/user');

@@ -19,7 +19,15 @@ class UserRepository {
     return createdUser;
   }
 
-  async getByEmail(email) { }
+  async getByEmail(email) {
+    const user = await User.findOne({
+      where: {
+        email
+      }
+    });
+
+    return user;
+  }
 }
 
 module.exports = UserRepository;

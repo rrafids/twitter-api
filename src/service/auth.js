@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const CONST = require('../constant/constant')
 
 class AuthService {
   constructor(userRepository, briApiRepositiry) {
@@ -16,17 +17,14 @@ class AuthService {
 
     if (isValid) {
       // TODO: generate jwt token
-      // payloadnya: email
-      const jwtSecret = 'SECRET';
-      const jwtExpireTime = '24h';
 
       const token = jwt.sign(
         {
           email: user.email,
         },
-        jwtSecret,
+        CONST.JWT.SECRET,
         {
-          expiresIn: jwtExpireTime,
+          expiresIn: CONST.JWT.EXPIRE_TIME,
         }
       );
 

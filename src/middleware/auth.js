@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const CONST = require('../constant/constant')
 
 class Auth {
   static authenticate(req, res, next) {
@@ -17,10 +18,9 @@ class Auth {
       });
 
     // 3. validate token
-    const jwtSecret = 'SECRET';
-    const payload = jwt.verify(token, jwtSecret)
+    const payload = jwt.verify(token, CONST.JWT.SECRET);
 
-    req.userEmail = payload.email
+    req.userEmail = payload.email;
 
     next();
   }

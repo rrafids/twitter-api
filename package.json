@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon main.js"
+    "start": "nodemon main.js",
+    "debug": "node inspect main.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "bcrypt": "^5.1.1",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
     "pg": "^8.12.0",
     "sequelize": "^6.37.3",
     "swagger-ui-express": "^5.0.1"

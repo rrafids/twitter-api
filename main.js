@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan');
 const app = express();
 const PORT = 2000;
 
@@ -16,6 +17,7 @@ const ThreadHandler = require('./src/handler/thread');
 const UserHandler = require('./src/handler/user');
 
 app.use(express.json());
+app.use(morgan('combined'));
 
 const userRepository = new UserRepository();
 

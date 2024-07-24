@@ -17,7 +17,6 @@ class AuthService {
 
     if (isValid) {
       // TODO: generate jwt token
-
       const token = jwt.sign(
         {
           email: user.email,

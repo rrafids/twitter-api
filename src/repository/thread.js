@@ -26,6 +26,18 @@ class ThreadRepository {
 
     return threadList;
   }
+
+  async insert(thread) {
+    const createdThread = await Thread.create({
+      user_id: thread.userId,
+      category_id: thread.categoryId,
+      title: thread.title,
+      content: thread.content,
+      image: thread.image
+    });
+
+    return createdThread;
+  }
 }
 
 module.exports = ThreadRepository;

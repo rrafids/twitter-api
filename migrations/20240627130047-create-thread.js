@@ -21,6 +21,9 @@ module.exports = {
       content: {
         type: Sequelize.STRING
       },
+      image: {
+        type: Sequelize.TEXT
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE

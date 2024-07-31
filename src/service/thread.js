@@ -7,8 +7,6 @@ class ThreadService {
     try {
       const threadList = await this.threadRepository.findAll()
 
-      
-
       return {
         statusCode: 200,
         threads: threadList
@@ -18,6 +16,22 @@ class ThreadService {
       return {
         statusCode: 500,
         threads: []
+      }
+    }
+  }
+
+  async create({ userId, categoryId, title, content, image }) {
+    try {
+      const createdThread = await this.threadRepository.insert({ userId, categoryId, title, content, image })
+
+      return {
+        statusCode: 201,
+        createdThread: createdThread
+      }
+    } catch (err) {
+      return {
+        statusCode: 500,
+        createdThread: null
       }
     }
   }

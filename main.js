@@ -1,5 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
+const upload = require('./utils/uploadFile');
+const uploadMemory = require('./utils/uploadFileMemory');
+const cloudinary = require('./config/cloudinary')
 const app = express();
 const PORT = 2000;
 
@@ -49,6 +52,31 @@ const threadHandler = new ThreadHandler(threadService);
 
 // Threads
 app.get('/threads', threadHandler.getAll);
+app.post('/threads', threadHandler.create);
+
+// Files
+app.post('/files/local/upload/', upload.single("image"), (req, res) => {
+  res.send("success");
+})
+
+app.post('/files/cloudinary/upload', uploadMemory.single("image"), async (req, res) => {
+  // TODO: upload to cloudinary storage
+  try {
+    const fileBuffer = req.file?.buffer.toString('base64');
+    const fileString = `data:${req.file?.mimetype};base64,${fileBuffer}`;
+
+    const uploadedFile = await cloudinary.uploader.upload(fileString);
+
+    return res.status(201).send({
+      message: "succes",
+      image: uploadedFile.secure_url
+    });
+  } catch (error) {
+    return res.status(400).send({
+      message: error,
+    });
+  }
+})
 
 // Swagger
 const swaggerUi = require('swagger-ui-express');

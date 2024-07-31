@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const upload = require('./utils/uploadFile');
 const uploadMemory = require('./utils/uploadFileMemory');
 const cloudinary = require('./config/cloudinary')
+const redisClient = require('./config/redis')
 const app = express();
 const PORT = 2000;
 
@@ -77,6 +78,31 @@ app.post('/files/cloudinary/upload', uploadMemory.single("image"), async (req, r
     });
   }
 })
+
+// Redis
+app.post('/redis', async (req, res) => {
+  const token = req.body.token;
+  await redisClient.connect();
+  await redisClient.set("user-" + userId, token);
+  await redisClient.disconnect();
+
+  res.send("success");
+})
+
+app.get('/redis', async (req, res) => {
+  await redisClient.connect();
+  const token = await redisClient.get("token");
+  await redisClient.disconnect();
+
+  res.send({
+    "message": "success",
+    "token": token
+  });
+})
+
+// TODO:
+// endpoint login save jwt tokennya ke redis
+// keynya berdasarkan user id
 
 // Swagger
 const swaggerUi = require('swagger-ui-express');

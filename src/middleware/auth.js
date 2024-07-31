@@ -22,6 +22,11 @@ class Auth {
 
     req.userEmail = payload.email;
 
+    // TODO:
+    // validate token ke redis
+    // kalo exist di redis = token valid
+    // ga ada = reject token invalid
+
     next();
   }
 

@@ -5,7 +5,6 @@ const CONST = require('../constant/constant')
 class AuthService {
   constructor(userRepository, briApiRepositiry) {
     this.userRepository = userRepository;
-    briApiRepositiry
   }
 
   async login({ email, password }) {
@@ -47,6 +46,9 @@ class AuthService {
       const encryptedPassword = bcrypt.hashSync(password, salt)
 
       const createdUser = await this.userRepository.insert({ name, email, password: encryptedPassword })
+
+      // TODO: integrate with nodemailer
+
 
       return {
         statusCode: 201,

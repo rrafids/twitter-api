@@ -1,0 +1,1 @@
+// TODO: init config to connect with nodemailer smtp

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const CONST = require('../constant/constant')
 
 class AuthService {
-  constructor(userRepository, briApiRepositiry) {
+  constructor(userRepository) {
     this.userRepository = userRepository;
   }
 
@@ -52,11 +52,13 @@ class AuthService {
 
       return {
         statusCode: 201,
+        message: "User registered successfully",
         createdUser: createdUser
       }
     } catch (err) {
       return {
         statusCode: 500,
+        message: err.errors,
         createdUser: null
       }
     }

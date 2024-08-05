@@ -5,6 +5,7 @@ class ThreadService {
 
   async getAll() {
     try {
+      // anggep import langsung ke repo
       const threadList = await this.threadRepository.findAll()
 
       return {

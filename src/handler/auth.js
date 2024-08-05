@@ -21,7 +21,8 @@ class AuthHandler {
     const serviceRes = await this.authService.register(payload)
 
     res.status(serviceRes.statusCode).send({
-      created_user: serviceRes.createdUser
+      created_user: serviceRes.createdUser,
+      message: serviceRes.message,
     })
   }
 }

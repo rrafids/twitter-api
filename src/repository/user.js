@@ -28,6 +28,14 @@ class UserRepository {
 
     return user;
   }
+
+  async deleteByEmail(email) {
+    await User.destroy({
+      where: {
+        email: email,
+      },
+    });
+  }
 }
 
 module.exports = UserRepository;

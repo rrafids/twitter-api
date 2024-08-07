@@ -1,24 +1,23 @@
 const express = require('express');
 const morgan = require('morgan');
-const upload = require('./utils/uploadFile');
-const uploadMemory = require('./utils/uploadFileMemory');
-const cloudinary = require('./config/cloudinary')
-const redisClient = require('./config/redis')
+const upload = require('../utils/uploadFile');
+const uploadMemory = require('../utils/uploadFileMemory');
+const cloudinary = require('../config/cloudinary')
+const redisClient = require('../config/redis')
 const app = express();
-const PORT = 2000;
 
 // Import dependecy
 // Import repository
-const UserRepository = require('./src/repository/user');
-const ThreadRepository = require('./src/repository/thread');
+const UserRepository = require('./repository/user');
+const ThreadRepository = require('./repository/thread');
 
 // Import service
-const UserService = require('./src/service/user');
-const ThreadService = require('./src/service/thread');
+const UserService = require('./service/user');
+const ThreadService = require('./service/thread');
 
 // Import handler
-const ThreadHandler = require('./src/handler/thread');
-const UserHandler = require('./src/handler/user');
+const ThreadHandler = require('./handler/thread');
+const UserHandler = require('./handler/user');
 
 app.use(express.json());
 app.use(morgan('combined'));
@@ -28,7 +27,7 @@ const userRepository = new UserRepository();
 const router = express.Router();
 
 // Import router
-const authRouter = require('./src/router/auth');
+const authRouter = require('./router/auth');
 
 // Use router
 router.use('/auth', authRouter)
@@ -42,7 +41,7 @@ const userService = new UserService(userRepository)
 const userHandler = new UserHandler(userService);
 
 // import middleware
-const authMiddleware = require('./src/middleware/auth')
+const authMiddleware = require('./middleware/auth')
 
 // User
 app.get('/users', authMiddleware.authenticate, authMiddleware.checkUserIsJavid, userHandler.getAll);
@@ -106,7 +105,7 @@ app.get('/redis', async (req, res) => {
 
 // Swagger
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger/swagger.json');
+const swaggerDocument = require('../swagger/swagger.json');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -117,6 +116,4 @@ app.use((req, res, next) => {
   })
 });
 
-app.listen(PORT, function () {
-  console.log(`Server berjalan pada http://localhost:${PORT}`);
-});
+module.exports = app

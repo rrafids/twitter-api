@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon main.js",
-    "debug": "node inspect main.js",
+    "start": "nodemon server.js",
+    "debug": "node inspect server.js",
     "test": "jest"
   },
   "keywords": [],

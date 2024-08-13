@@ -7,20 +7,20 @@ class ThreadRepository {
     const threadList = await Thread.findAll(
       {
         // attributes: ['id', 'title', 'content'],
-        include: [
-          {
-            model: User,
-            required: true,
-            as: "user",
-            // attributes: ['name']
-          },
-          {
-            model: Category,
-            required: true,
-            as: "category",
-            // attributes: ['name']
-          }
-        ]
+        // include: [
+        // {
+        //   model: User,
+        //   required: true,
+        //   as: "user",
+        // attributes: ['name']
+        // },
+        // {
+        //   model: Category,
+        //   required: true,
+        //   as: "category",
+        // attributes: ['name']
+        // }
+        // ]
       }
     );
 

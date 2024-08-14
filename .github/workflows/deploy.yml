@@ -15,7 +15,7 @@ jobs:
         with:
           host: "35.223.45.220"
           username: "rrafids"
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
           port: 22
           script: |
             ./build.sh

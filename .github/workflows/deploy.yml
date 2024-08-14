@@ -1,0 +1,26 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: twitter-api
+
+on:
+  push:
+    branches: ['master']
+  pull_request:
+    branches: ['master']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy using gcloud
+        uses: 'google-github-actions/ssh-compute@v1'
+        with:
+          instance_name: 'twitter-api'
+          zone: 'us-central1-b'
+          ssh_private_key: '${{ secrets.GCP_SSH_PRIVATE_KEY }}'
+          script: |
+            cd /home/rrafids/twitter-api
+            git pull origin master
+            pm2 delete twitter-api
+            pm2 start server.js -n twitter-api

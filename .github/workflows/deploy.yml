@@ -19,5 +19,4 @@ jobs:
 
       - name: Execute deployment script via SSH
         run: |
-          scp -i ~/.ssh/id_ed25519 ./build.sh rrafids@35.223.45.220:/home/rrafids/twitter-api/build.sh
-          ssh -i ~/.ssh/id_ed25519 rrafids@35.223.45.220 'bash /home/rrafids/twitter-api/build.sh'
+          ssh -i ~/.ssh/id_ed25519 rrafids@35.223.45.220 'bash -s' < ./build.sh

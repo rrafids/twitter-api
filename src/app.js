@@ -65,8 +65,8 @@ app.post('/files/local/upload/', upload.single("image"), (req, res) => {
 app.post('/files/cloudinary/upload', uploadMemory.single("image"), async (req, res) => {
   // TODO: upload to cloudinary storage
   try {
-    const fileBuffer = req.file?.buffer.toString('base64');
-    const fileString = `data:${req.file?.mimetype};base64,${fileBuffer}`;
+    const fileBuffer = req.file.buffer.toString('base64');
+    const fileString = `data:${req.file.mimetype};base64,${fileBuffer}`;
 
     const uploadedFile = await cloudinary.uploader.upload(fileString);
 

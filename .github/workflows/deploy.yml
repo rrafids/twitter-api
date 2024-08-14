@@ -18,4 +18,5 @@ jobs:
           key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
           port: 22
           script: |
+            cd /home/rrafids/twitter-api
             ./build.sh

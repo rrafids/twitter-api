@@ -13,13 +13,18 @@ jobs:
       - name: Deploy using ssh
         uses: appleboy/ssh-action@master
         with:
-          host: "35.223.45.220"
-          username: "rrafids"
+          host: '35.223.45.220'
+          username: 'rrafids'
           key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            sudo -i
+            # Mark the directory as safe
             git config --global --add safe.directory /home/rrafids/twitter-api
+
+            # Fix permissions
+            sudo chown -R rrafids:rrafids /home/rrafids/twitter-api
+            sudo chmod -R u+rwX /home/rrafids/twitter-api
+
             cd /home/rrafids/twitter-api
-            chmod +x ./build.sh
+            sudo chmod +x ./build.sh
             ./build.sh

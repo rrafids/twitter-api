@@ -19,11 +19,12 @@ jobs:
           port: 22
           script: |
             git config --global --add safe.directory /home/rrafids/twitter-api
+            
+            apt update
+            apt install -y nodejs npm
 
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-            source ~/.bashrc
-            nvm install node
-            sudo npm install -g pm2
+            # Ensure pm2 is installed
+            npm install -g pm2
 
             # Change to the project directory and execute the build script
             cd /home/rrafids/twitter-api

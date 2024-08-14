@@ -20,7 +20,6 @@ jobs:
           script: |
             git config --global --add safe.directory /home/rrafids/twitter-api
             
-            apt update
             curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
             apt install -y nodejs
 

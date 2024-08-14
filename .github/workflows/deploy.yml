@@ -19,9 +19,4 @@ jobs:
 
       - name: Execute deployment script via SSH
         run: |
-          ssh -i ~/.ssh/id_ed25519 rrafids@35.223.45.220 << 'EOF'
-          cd /home/rrafids/twitter-api
-          git pull origin master
-          pm2 delete twitter-api
-          pm2 start server.js -n twitter-api
-          EOF
+          ssh -i ~/.ssh/id_ed25519 rrafids@35.223.45.220 'bash -s' < ./build.sh

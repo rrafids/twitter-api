@@ -10,14 +10,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan 35.223.45.220 >> ~/.ssh/known_hosts
-
-      - name: Execute deployment script via SSH
-        run: |
-          ssh -i ~/.ssh/id_ed25519 rrafids@35.223.45.220 'bash -s' < ./build.sh
-          
+      - name: Deploy using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: "35.223.45.220"
+          username: "rrafids"
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            ./build.sh

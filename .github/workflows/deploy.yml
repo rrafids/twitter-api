@@ -27,4 +27,5 @@ jobs:
           zone: 'us-central1-b'
           ssh_private_key: '${{ secrets.GCP_SSH_PRIVATE_KEY }}'
           command: '. scripts/build.sh'
+
           

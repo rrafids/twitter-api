@@ -19,5 +19,5 @@ jobs:
           port: 22
           script: |
             cd /home/rrafids/twitter-api
-            chmod +x ./build.sh
+            sudo chmod +x ./build.sh
             ./build.sh

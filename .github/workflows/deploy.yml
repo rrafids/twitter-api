@@ -20,6 +20,7 @@ jobs:
           zone: 'us-central1-b'
           ssh_private_key: '${{ secrets.GCP_SSH_PRIVATE_KEY }}'
           script: |
+            ls
             cd /home/rrafids/twitter-api
             git pull origin master
             pm2 delete twitter-api

@@ -20,7 +20,7 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan 35.223.45.220  >> ~/.ssh/known_hosts
       - name: Execute deployment script via SSH
-        run: ssh -i ~/.ssh/id_ed25519 rrafids@35.223.45.220  'bash -s' < ./scripts/build.sh
+        run: ssh -i ~/.ssh/id_ed25519 rrafids@35.223.45.220  'bash -s' < ../../scripts/build.sh
 
         # - uses: 'actions/checkout@v4'
 

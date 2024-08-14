@@ -19,10 +19,4 @@ jobs:
           instance_name: 'twitter-api'
           zone: 'us-central1-b'
           ssh_private_key: '${{ secrets.GCP_SSH_PRIVATE_KEY }}'
-          script: |
-            cd /
-            ls
-            cd /home/rrafids/twitter-api
-            git pull origin master
-            pm2 delete twitter-api
-            pm2 start server.js -n twitter-api
+          command: '. scripts/build.sh'

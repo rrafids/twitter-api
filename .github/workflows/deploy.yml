@@ -11,9 +11,15 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
     steps:
-      - name: Deploy using gcloud
+      - uses: 'actions/checkout@v4'
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - id: 'compute-ssh'
         uses: 'google-github-actions/ssh-compute@v1'
         with:
           instance_name: 'twitter-api'

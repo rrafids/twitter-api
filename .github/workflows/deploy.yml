@@ -18,7 +18,7 @@ jobs:
           key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            sudo -u rrafids git config --global --add safe.directory /home/rrafids/twitter-api
+           git config --global --add safe.directory /home/rrafids/twitter-api
 
             # Change to the project directory and execute the build script
             cd /home/rrafids/twitter-api

@@ -14,15 +14,10 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: '35.223.45.220'
-          username: 'rrafids'
+          username: 'root'
           key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            # Fix permissions
-            sudo chown -R rrafids:rrafids /home/rrafids/twitter-api
-            sudo chmod -R u+rwX /home/rrafids/twitter-api
-
-            # Change to the project directory and execute the build script
             cd /home/rrafids/twitter-api
-            sudo chmod +x ./build.sh
-            sudo ./build.sh
+            chmod +x ./build.sh
+            ./build.sh

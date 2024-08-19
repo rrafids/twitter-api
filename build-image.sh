@@ -1,0 +1,1 @@
+docker build -t twitter-api:1 .
